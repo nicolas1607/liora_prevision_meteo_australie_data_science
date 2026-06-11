@@ -1,5 +1,31 @@
-Project Name
-==============================
+# Prévision météo en Australie
+
+### Pré-requis
+```
+Python 3.12.3
+```
+
+## Librairies utilisées
+```
+> pip install numpy pandas seaborn matplotlib missingno statsmodels ipykernel scikit-learn jinja2
+```
+
+## Installer le projet et les librairies
+```
+> git clone https://github.com/nicolas1607/juin25_alt2_mle_meteo
+> cd juin25_alt2_mle_meteo/
+> python3 -m venv env
+> source env/bin/activate
+> pip install -r requirements.txt
+> git checkout -b ma_branche (ex : nicolas)
+> git pull origin ma_branche (ex : nicolas)
+```
+
+## Ajouter le dataset au projet
+```
+Ajouter les fichiers du dossier Google Drive /_data
+directement dans le dossier /data de votre projet
+```
 
 This repo is a Starting Pack for DS projects. You can rearrange the structure to make it fits your project.
 
