@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_22002fea264307b8aae597816ec5266b {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+     <div style="
+        position: fixed;
+        bottom: 50px; left: 50px; width: 260px; height: 100px;
+        border:2px solid grey; z-index:9999; font-size:14px;
+        background-color:white;
+        text-align: left;
+        padding: 10px;
+    ">
+        <b>Légende</b><br>
+        <i class="fa fa-circle" style="color:orange"></i>&nbsp; 4 variables totalement absentes<br>
+        <i class="fa fa-circle" style="color:red"></i>&nbsp; 6 variables totalement absentes
+     </div>
+     
+    
+            <div class="folium-map" id="map_22002fea264307b8aae597816ec5266b" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_22002fea264307b8aae597816ec5266b = L.map(
+                "map_22002fea264307b8aae597816ec5266b",
+                {
+                    center: [-28.2744, 133.7751],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 5,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_2befc440ffeb06d894fec70875f3ebef = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_2befc440ffeb06d894fec70875f3ebef.addTo(map_22002fea264307b8aae597816ec5266b);
+        
+    
+            var circle_marker_486998a670c22468b95b7df4e9800d16 = L.circleMarker(
+                [-33.8817, 150.7443],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(map_22002fea264307b8aae597816ec5266b);
+        
+    
+        var popup_7b4984b76353b4260939be3283ef97d6 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_540e35917dc51e5f1ddb870d2d796fac = $(`<div id="html_540e35917dc51e5f1ddb870d2d796fac" style="width: 100.0%; height: 100.0%;">         <b>BadgerysCreek</b><br>         Nombre de variables totalement absentes : 4<br>         <b>Variables concernées :</b><br>         Evaporation<br>Sunshine<br>Cloud9am<br>Cloud3pm         </div>`)[0];
+                popup_7b4984b76353b4260939be3283ef97d6.setContent(html_540e35917dc51e5f1ddb870d2d796fac);
+            
+        
+
+        circle_marker_486998a670c22468b95b7df4e9800d16.bindPopup(popup_7b4984b76353b4260939be3283ef97d6)
+        ;
+
+        
+    
+    
+            circle_marker_486998a670c22468b95b7df4e9800d16.bindTooltip(
+                `<div>
+                     BadgerysCreek: 4 variable(s) absente(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d93e9e07fe3d23c67fd56c868d7857fb = L.circleMarker(
+                [-28.0167, 153.4],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(map_22002fea264307b8aae597816ec5266b);
+        
+    
+        var popup_088ecc4e638719f5fe5c8d24e7974703 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_95fe1d58d64d8e56d39792703bed910d = $(`<div id="html_95fe1d58d64d8e56d39792703bed910d" style="width: 100.0%; height: 100.0%;">         <b>GoldCoast</b><br>         Nombre de variables totalement absentes : 4<br>         <b>Variables concernées :</b><br>         Evaporation<br>Sunshine<br>Cloud9am<br>Cloud3pm         </div>`)[0];
+                popup_088ecc4e638719f5fe5c8d24e7974703.setContent(html_95fe1d58d64d8e56d39792703bed910d);
+            
+        
+
+        circle_marker_d93e9e07fe3d23c67fd56c868d7857fb.bindPopup(popup_088ecc4e638719f5fe5c8d24e7974703)
+        ;
+
+        
+    
+    
+            circle_marker_d93e9e07fe3d23c67fd56c868d7857fb.bindTooltip(
+                `<div>
+                     GoldCoast: 4 variable(s) absente(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1bbad0ae47beff4e510d8d21573c5302 = L.circleMarker(
+                [-35.5294, 148.7723],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(map_22002fea264307b8aae597816ec5266b);
+        
+    
+        var popup_43708d0a3732580b79b90507cb52e83a = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_240ce6d9effbf630f320319d376f167f = $(`<div id="html_240ce6d9effbf630f320319d376f167f" style="width: 100.0%; height: 100.0%;">         <b>MountGinini</b><br>         Nombre de variables totalement absentes : 6<br>         <b>Variables concernées :</b><br>         Evaporation<br>Sunshine<br>Pressure9am<br>Pressure3pm<br>Cloud9am<br>Cloud3pm         </div>`)[0];
+                popup_43708d0a3732580b79b90507cb52e83a.setContent(html_240ce6d9effbf630f320319d376f167f);
+            
+        
+
+        circle_marker_1bbad0ae47beff4e510d8d21573c5302.bindPopup(popup_43708d0a3732580b79b90507cb52e83a)
+        ;
+
+        
+    
+    
+            circle_marker_1bbad0ae47beff4e510d8d21573c5302.bindTooltip(
+                `<div>
+                     MountGinini: 6 variable(s) absente(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_88e177d989a415e2b56f1b988171e244 = L.circleMarker(
+                [-32.9283, 151.7817],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(map_22002fea264307b8aae597816ec5266b);
+        
+    
+        var popup_b7c06038ea2798de298286c843aa8822 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e173fcf478e3e45fd4b7b30fe5195a75 = $(`<div id="html_e173fcf478e3e45fd4b7b30fe5195a75" style="width: 100.0%; height: 100.0%;">         <b>Newcastle</b><br>         Nombre de variables totalement absentes : 6<br>         <b>Variables concernées :</b><br>         Evaporation<br>Sunshine<br>WindGustDir<br>WindGustSpeed<br>Pressure9am<br>Pressure3pm         </div>`)[0];
+                popup_b7c06038ea2798de298286c843aa8822.setContent(html_e173fcf478e3e45fd4b7b30fe5195a75);
+            
+        
+
+        circle_marker_88e177d989a415e2b56f1b988171e244.bindPopup(popup_b7c06038ea2798de298286c843aa8822)
+        ;
+
+        
+    
+    
+            circle_marker_88e177d989a415e2b56f1b988171e244.bindTooltip(
+                `<div>
+                     Newcastle: 6 variable(s) absente(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d8f130f7faddb25d43df73bc138816e7 = L.circleMarker(
+                [-36.3328, 141.6503],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(map_22002fea264307b8aae597816ec5266b);
+        
+    
+        var popup_c409028b15a4f4ef1e19216dc1d0fb98 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_efdb911d3238dee41e983c582ad6bc34 = $(`<div id="html_efdb911d3238dee41e983c582ad6bc34" style="width: 100.0%; height: 100.0%;">         <b>Nhil</b><br>         Nombre de variables totalement absentes : 4<br>         <b>Variables concernées :</b><br>         Evaporation<br>Sunshine<br>Cloud9am<br>Cloud3pm         </div>`)[0];
+                popup_c409028b15a4f4ef1e19216dc1d0fb98.setContent(html_efdb911d3238dee41e983c582ad6bc34);
+            
+        
+
+        circle_marker_d8f130f7faddb25d43df73bc138816e7.bindPopup(popup_c409028b15a4f4ef1e19216dc1d0fb98)
+        ;
+
+        
+    
+    
+            circle_marker_d8f130f7faddb25d43df73bc138816e7.bindTooltip(
+                `<div>
+                     Nhil: 4 variable(s) absente(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0500eda270d2f011f8558287013498c2 = L.circleMarker(
+                [-33.2817, 151.5677],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(map_22002fea264307b8aae597816ec5266b);
+        
+    
+        var popup_24ae7bb7ac888ca041ae67f977eec5a3 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_5ef34c47ae1f3e018418b55e84194f7d = $(`<div id="html_5ef34c47ae1f3e018418b55e84194f7d" style="width: 100.0%; height: 100.0%;">         <b>NorahHead</b><br>         Nombre de variables totalement absentes : 4<br>         <b>Variables concernées :</b><br>         Evaporation<br>Sunshine<br>Cloud9am<br>Cloud3pm         </div>`)[0];
+                popup_24ae7bb7ac888ca041ae67f977eec5a3.setContent(html_5ef34c47ae1f3e018418b55e84194f7d);
+            
+        
+
+        circle_marker_0500eda270d2f011f8558287013498c2.bindPopup(popup_24ae7bb7ac888ca041ae67f977eec5a3)
+        ;
+
+        
+    
+    
+            circle_marker_0500eda270d2f011f8558287013498c2.bindTooltip(
+                `<div>
+                     NorahHead: 4 variable(s) absente(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_fba88d8ff850efbee63b88da2f3cf8da = L.circleMarker(
+                [-33.7507, 150.6942],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(map_22002fea264307b8aae597816ec5266b);
+        
+    
+        var popup_8bfc402cdc7703531e63aadb5f21a791 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_c7b00bf94a72ff16fb3da05301de3ba7 = $(`<div id="html_c7b00bf94a72ff16fb3da05301de3ba7" style="width: 100.0%; height: 100.0%;">         <b>Penrith</b><br>         Nombre de variables totalement absentes : 6<br>         <b>Variables concernées :</b><br>         Evaporation<br>Sunshine<br>Pressure9am<br>Pressure3pm<br>Cloud9am<br>Cloud3pm         </div>`)[0];
+                popup_8bfc402cdc7703531e63aadb5f21a791.setContent(html_c7b00bf94a72ff16fb3da05301de3ba7);
+            
+        
+
+        circle_marker_fba88d8ff850efbee63b88da2f3cf8da.bindPopup(popup_8bfc402cdc7703531e63aadb5f21a791)
+        ;
+
+        
+    
+    
+            circle_marker_fba88d8ff850efbee63b88da2f3cf8da.bindTooltip(
+                `<div>
+                     Penrith: 6 variable(s) absente(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_cdee3426a92fa9bb554ef992239e0ae5 = L.circleMarker(
+                [-32.9815, 121.6438],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(map_22002fea264307b8aae597816ec5266b);
+        
+    
+        var popup_02daf029bf3ef3c7610434ebd85128d4 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_a6751aee0199266a407d5c72fb784e38 = $(`<div id="html_a6751aee0199266a407d5c72fb784e38" style="width: 100.0%; height: 100.0%;">         <b>SalmonGums</b><br>         Nombre de variables totalement absentes : 6<br>         <b>Variables concernées :</b><br>         Evaporation<br>Sunshine<br>Pressure9am<br>Pressure3pm<br>Cloud9am<br>Cloud3pm         </div>`)[0];
+                popup_02daf029bf3ef3c7610434ebd85128d4.setContent(html_a6751aee0199266a407d5c72fb784e38);
+            
+        
+
+        circle_marker_cdee3426a92fa9bb554ef992239e0ae5.bindPopup(popup_02daf029bf3ef3c7610434ebd85128d4)
+        ;
+
+        
+    
+    
+            circle_marker_cdee3426a92fa9bb554ef992239e0ae5.bindTooltip(
+                `<div>
+                     SalmonGums: 6 variable(s) absente(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c5f62053aae8bf7b5cf6abc0d4446026 = L.circleMarker(
+                [-35.4244, 149.0888],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(map_22002fea264307b8aae597816ec5266b);
+        
+    
+        var popup_b8388686e578bb7081025e1880b69a7e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_76abb9c2465fdaffa3ae36a6109dc3b3 = $(`<div id="html_76abb9c2465fdaffa3ae36a6109dc3b3" style="width: 100.0%; height: 100.0%;">         <b>Tuggeranong</b><br>         Nombre de variables totalement absentes : 4<br>         <b>Variables concernées :</b><br>         Evaporation<br>Sunshine<br>Cloud9am<br>Cloud3pm         </div>`)[0];
+                popup_b8388686e578bb7081025e1880b69a7e.setContent(html_76abb9c2465fdaffa3ae36a6109dc3b3);
+            
+        
+
+        circle_marker_c5f62053aae8bf7b5cf6abc0d4446026.bindPopup(popup_b8388686e578bb7081025e1880b69a7e)
+        ;
+
+        
+    
+    
+            circle_marker_c5f62053aae8bf7b5cf6abc0d4446026.bindTooltip(
+                `<div>
+                     Tuggeranong: 4 variable(s) absente(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b90e4da571a968d0b736b54f32ec9978 = L.circleMarker(
+                [-34.9777, 116.7338],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(map_22002fea264307b8aae597816ec5266b);
+        
+    
+        var popup_b93790d5032adca18aa214e8b3f55201 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_28232d6be85ce0197dd810ad13de8d3d = $(`<div id="html_28232d6be85ce0197dd810ad13de8d3d" style="width: 100.0%; height: 100.0%;">         <b>Walpole</b><br>         Nombre de variables totalement absentes : 4<br>         <b>Variables concernées :</b><br>         Evaporation<br>Sunshine<br>Cloud9am<br>Cloud3pm         </div>`)[0];
+                popup_b93790d5032adca18aa214e8b3f55201.setContent(html_28232d6be85ce0197dd810ad13de8d3d);
+            
+        
+
+        circle_marker_b90e4da571a968d0b736b54f32ec9978.bindPopup(popup_b93790d5032adca18aa214e8b3f55201)
+        ;
+
+        
+    
+    
+            circle_marker_b90e4da571a968d0b736b54f32ec9978.bindTooltip(
+                `<div>
+                     Walpole: 4 variable(s) absente(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_26886bd3429eb64147b2c29ee708b9d7 = L.circleMarker(
+                [-34.0261, 115.1005],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(map_22002fea264307b8aae597816ec5266b);
+        
+    
+        var popup_08feabb4ed6837be739223ce64929347 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_0b27bfde0830b61eaa5edabe54084d51 = $(`<div id="html_0b27bfde0830b61eaa5edabe54084d51" style="width: 100.0%; height: 100.0%;">         <b>Witchcliffe</b><br>         Nombre de variables totalement absentes : 4<br>         <b>Variables concernées :</b><br>         Evaporation<br>Sunshine<br>Cloud9am<br>Cloud3pm         </div>`)[0];
+                popup_08feabb4ed6837be739223ce64929347.setContent(html_0b27bfde0830b61eaa5edabe54084d51);
+            
+        
+
+        circle_marker_26886bd3429eb64147b2c29ee708b9d7.bindPopup(popup_08feabb4ed6837be739223ce64929347)
+        ;
+
+        
+    
+    
+            circle_marker_26886bd3429eb64147b2c29ee708b9d7.bindTooltip(
+                `<div>
+                     Witchcliffe: 4 variable(s) absente(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+</script>
+</html>
