@@ -1,30 +1,32 @@
 # Prévision météo en Australie
 
-### Pré-requis
+## Pré-requis
 ```
 Python 3.12.3
 ```
 
-## Librairies utilisées
+## Initialiser le projet
 ```
-> pip install numpy pandas seaborn matplotlib missingno statsmodels ipykernel scikit-learn jinja2
-```
-
-## Installer le projet et les librairies
-```
-> git clone https://github.com/nicolas1607/juin25_alt2_mle_meteo
-> cd juin25_alt2_mle_meteo/
+> git clone git@github.com:DataScientest-Studio/juin25_alt2_mle_meteo.git
+> cd juin25_alt2_mle_meteo
 > python3 -m venv env
 > source env/bin/activate
 > pip install -r requirements.txt
-> git checkout -b ma_branche (ex : nicolas)
-> git pull origin ma_branche (ex : nicolas)
+
+Ajouter les fichiers du dossier Google Drive /_data dans le dossier /data de votre projet
 ```
 
-## Ajouter le dataset au projet
+## Travailler sur un ticket
 ```
-Ajouter les fichiers du dossier Google Drive /_data
-directement dans le dossier /data de votre projet
+Les tickets sont disponibles dans l'onglet "Projects" du repo Github
+
+> git checkout main
+> git pull origin main (pour être sûr d'être à jour)
+> git checkout -b ma_branche (ex : modelisation-linear-regression)
+> git commit -m "implémentation du modèle de régression linéaire"
+> git push origin modelisation-linear-regression
+
+Créer ensuite une pull request dans l'onglet "Pull requests" du repo Github
 ```
 
 This repo is a Starting Pack for DS projects. You can rearrange the structure to make it fits your project.
