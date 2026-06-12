@@ -10,7 +10,11 @@ Python 3.12.3
 > git clone git@github.com:DataScientest-Studio/juin25_alt2_mle_meteo.git
 > cd juin25_alt2_mle_meteo
 > python3 -m venv env
-> source env/bin/activate
+
+> source env/bin/activate     # Pour Linux / macOS
+> env\Scripts\activate        # Pour Windows (Command Prompt)
+> env\Scripts\Activate.ps1    # Pour Windows (PowerShell)
+
 > pip install -r requirements.txt
 
 Ajouter les fichiers du dossier Google Drive /_data dans le dossier /data de votre projet
