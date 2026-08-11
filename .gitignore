@@ -164,3 +164,7 @@ cython_debug/
 
 # Data folder
 data/
+
+# Modeles serialises (generes par les notebooks de modelisation)
+models/*
+!models/.gitkeep
