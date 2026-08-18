@@ -1,0 +1,9 @@
+Metric,Value
+Accuracy,0.8351
+Precision (Rain),0.6908
+Recall (Rain),0.4950
+F1-Score (Rain),0.5768
+ROC-AUC,0.8436
+PR-AUC,0.6544
+Log Loss,0.3840
+Brier Score,0.1190
