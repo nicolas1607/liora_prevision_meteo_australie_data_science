@@ -167,3 +167,9 @@ data/
 
 # Models folder
 models/
+
+.idea/
+.venv/
+**/catboost_info/
+__pycache__/
+*.pyc
