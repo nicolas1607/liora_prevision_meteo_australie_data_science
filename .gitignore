@@ -166,7 +166,7 @@ cython_debug/
 data/
 
 # Models folder
-models/
+# models/
 
 .idea/
 .venv/
