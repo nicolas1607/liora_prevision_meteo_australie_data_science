@@ -163,9 +163,14 @@ cython_debug/
 .vscode/
 
 # Data folder
-data/
+data/*
+!data/weatherAUS.csv
 
+# Models folder
+models/
 
-# Modeles serialises (generes par les notebooks de modelisation)
-models/*
-!models/.gitkeep
+.idea/
+.venv/
+**/catboost_info/
+__pycache__/
+*.pyc
