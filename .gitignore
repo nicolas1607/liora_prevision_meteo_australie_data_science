@@ -169,6 +169,9 @@ data/*
 # Models folder
 models/
 
+# Notebooks outputs
+notebooks/_executed/
+
 .idea/
 .venv/
 **/catboost_info/
