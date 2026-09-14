@@ -1,5 +1,6 @@
 import streamlit as st
-import pandas as pd
+
+from tools import *
 
 st.title("🤖 Modélisation")
 
@@ -16,19 +17,23 @@ with tab_metrics:
     
     st.subheader("Choix et hiérarchie des métriques")
     st.markdown("""
-    - **Indépendantes du seuil (comparaison entre modèles)**
-        - ROC-AUC (référence de comparaison) : mesure la capacité à distinguer les deux classes indépendamment du seuil de décision, tout en restant robuste au déséquilibre.
-        - PR-AUC (indicateur complémentaire) : la ROC-AUC peut paraître élevée même sur des données déséquilibrées, et la PR-AUC reflète les performances sur la classe minoritaire.
+    L'accuracy est écartée étant donné qu'elle est peu informative sur des données déséquilibrées. 
+    Le choix est donc porté sur des métriques plus pertinentes pour la classe minoritaire "Yes" :
     """)
     st.markdown("""
-    - **Dépendantes du seuil (évaluation opérationnelle d'un modèle)**
-        - F1-score "Yes" (métrique opérationnelle) : combine précision et recall sur la classe pluie et évalue la performance sur la classe minoritaire plutôt que de la diluer dans une moyenne.
-        - Recall "Yes" : un recall faible signale trop de jours de pluie manqués (faux négatifs).
-        - Précision "Yes" : une précision faible signale trop de fausses alertes (faux positifs).
-    """)
+    <div class='title-center'><b>Indépendantes du seuil</b><br>(comparaison entre modèles)</div>
+    """, unsafe_allow_html=True)
+    _, col1, col2, _ = st.columns([1, 2, 2, 1])
+    col1.markdown("<div class='markdown-metric'>Référence de comparaison<br><b>ROC-AUC</b></div>", unsafe_allow_html=True)
+    col2.markdown("<div class='markdown-metric'>Indicateur complémentaire<br><b>PR-AUC</b></div>", unsafe_allow_html=True)
     st.markdown("""
-    L'accuracy est écartée : elle est peu informative sur des données déséquilibrées.
-
+    <div class='title-center'><b>Dépendantes du seuil</b><br>(évaluation opérationnelle d'un modèle)</div>
+    """, unsafe_allow_html=True)
+    col1, col2, col3 = st.columns(3)
+    col1.markdown("<div class='markdown-metric'>Métrique opérationnelle<br><b>F1-score 'Yes'</b></div>", unsafe_allow_html=True)
+    col2.markdown("<div class='markdown-metric'>Indicateur complémentaire<br><b>Recall 'Yes'</b></div>", unsafe_allow_html=True)
+    col3.markdown("<div class='markdown-metric'>Indicateur complémentaire<br><b>Précision 'Yes'</b></div>", unsafe_allow_html=True)
+    st.markdown("""
     On choisit des métriques indépendantes du seuil pour comparer les modèles entre eux, et des métriques dépendantes du seuil pour évaluer la performance opérationnelle d'un modèle donné.
 
     L'asymétrie métier (un faux négatif coûte plus cher qu'un faux positif) est traitée ultérieurement par pondération des classes et ajustement du seuil.
@@ -39,38 +44,134 @@ with tab_models:
     
     st.subheader("Choix et hiérarchie des modèles")
     st.markdown("""
-    **1. Baseline : établir un plancher de performance minimal**
-    - Dummy Classifier (référence minimale indispensable) : avec 78 % de jours sans pluie, un modèle prédisant systématiquement la classe majoritaire atteint déjà une accuracy élevée, ce qui justifie l'abandon de cette métrique au profit du F1-score et de le ROC-AUC.
+    **1. Baseline (établir un plancher de performance minimal)** : DummyClassifier
 
-    **2. Linéaire : tester l'hypothèse de séparabilité linéaire**
-    - Logistic Regression : apporte un modèle probabiliste directement interprétable via ses coefficients, et sert de référence pour juger de l'apport des approches non linéaires.
-    - Linear SVC : complète cette étape en optimisant une marge de séparation plutôt qu'une vraisemblance ; sa comparaison avec la régression logistique permet d'évaluer la sensibilité du problème à la fonction de perte choisie.
+    **2. Linéaire : (tester l'hypothèse de séparabilité linéaire)** : LogisticRegression, LinearSVC
 
-    **3. Bagging : capturer les interactions non linéaires**
-    - Decision Tree : modélise nativement les effets de seuil que les modèles linéaires ne peuvent représenter sans termes d'interaction explicites.
-    - Random Forest : corrige la variance élevée et la tendance au surapprentissage de l'arbre isolé par agrégation d'arbres décorrélés, tout en restant robuste aux valeurs extrêmes.
+    **3. Bagging : (capturer les interactions non linéaires)** : DecisionTreeClassifier, RandomForestClassifier
 
-    **4. Boosting : maximiser la performance prédictive sur la classe minoritaire**
-    - Le boosting construit les arbres séquentiellement en pondérant les erreurs résiduelles, stratégie particulièrement adaptée à un jeu déséquilibré où les jours de pluie sont précisément les observations les plus difficiles à classer.
-    - XGBoost, LightGBM et CatBoost : les trois implémentations retenues reposent sur le même principe mais diffèrent par la stratégie de croissance des arbres et de régularisation. Leur comparaison permet de vérifier la stabilité des performances au sein de cette famille.
-    - Ces modèles exposent des mesures d'importance des variables (feature importance) qui restituent une part de l'interprétabilité perdue par rapport aux modèles linéaires.
+    **4. Boosting (maximiser la performance prédictive sur la classe minoritaire)** : XGBoost, LightGBM, CatBoost
     """)
 
 with tab_comparison:
-    
+
     st.subheader("Comparaison des familles de modèles")
-    st.info("TODO : charger le tableau de synthèse produit par `6_synthese_modeles.ipynb`.")
 
-    # Exemple de structure attendue :
-    # df = pd.read_csv("resources/synthese_modeles.csv")
-    # st.dataframe(df, use_container_width=True)
+    LIBELLES = {
+        "logistic_regression": "Linéaire — Logistic Regression",
+        "linear_svc":          "Linéaire — Linear SVC",
+        "decision_tree":       "Bagging — Decision Tree",
+        "random_forest":       "Bagging — Random Forest",
+        "light_gbm":           "Boosting — LightGBM",
+        "catboost":            "Boosting — CatBoost",
+        "xgboost":             "Boosting — XGBoost",
+    }
+    ORDRE = list(LIBELLES)
 
+    familles = [
+        d.name for d in MODEL_DIR.iterdir()
+        if d.is_dir() and any(d.glob("*.joblib"))
+    ]
+    familles.sort(key=lambda n: ORDRE.index(n) if n in ORDRE else len(ORDRE))
+
+    if not familles:
+        st.warning(f"Aucun modèle trouvé sous `{MODEL_DIR}`.")
+        st.stop()
+
+    col_famille, col_variante = st.columns(2)
+
+    familles = [
+        d.name for d in MODEL_DIR.iterdir()
+        if d.is_dir() and lister_modeles(d)
+    ]
+    familles.sort(key=lambda n: ORDRE.index(n) if n in ORDRE else len(ORDRE))
+
+    if not familles:
+        st.warning(f"Aucun modèle (`.joblib` ou `.pkl`) sous `{MODEL_DIR}`.")
+        st.stop()
+
+    col_famille, col_variante = st.columns(2)
+
+    famille = col_famille.selectbox(
+        "Famille de modèle",
+        options=familles,
+        format_func=lambda n: LIBELLES.get(n, n.replace("_", " ").title()),
+    )
+
+    variantes = lister_modeles(MODEL_DIR / famille)
+
+    variante = col_variante.selectbox(
+        "Variante",
+        options=list(variantes),
+        format_func=lambda n: n.replace("_", " "),
+    )
+
+    bundle = load_model_path(str(variantes[variante]))
+
+    if not isinstance(bundle, dict):
+        st.warning(
+            f"`{variante}` a été exporté en objet nu (`{type(bundle).__name__}`) "
+            "et non au format bundle : ni métriques ni seuil disponibles."
+        )
+        bundle = {"model": bundle}
+
+    # --- Scores -----------------------------------------------------
+    metrics = bundle.get("metrics", {})
+    seuil = bundle.get("threshold", bundle.get("seuil"))
+    features = bundle.get("features", [])
+
+    col1, col2 = st.columns(2)
+    col1.metric("Seuil de décision", f"{seuil:.3f}" if isinstance(seuil, float) else "—")
+    col2.metric("Nombre de features", len(features) if features else "—")
+
+    if not metrics:
+        st.info("Aucune métrique enregistrée dans ce bundle.")
+    else:
+        st.markdown("#### Scores")
+        cles = list(metrics)
+        cols = st.columns(min(len(cles), 4))
+        for i, cle in enumerate(cles):
+            v = metrics[cle]
+            cols[i % len(cols)].metric(
+                cle, f"{v:.3f}" if isinstance(v, (int, float)) else str(v)
+            )
+
+    with st.expander("Hyperparamètres"):
+        st.json(bundle["model"].get_params(), expanded=False)
+
+    with st.expander("Liste des features"):
+        st.write(features)
+
+    # --- Figures ----------------------------------------------------
+    dossier_figures = FIGURE_DIR / famille
+
+    if not dossier_figures.is_dir():
+        st.caption(f"Pas de dossier `reports/figures/{famille}/`.")
+    else:
+        figures = sorted(dossier_figures.glob("*.png"))
+        if figures:
+            st.markdown("#### Figures associées")
+            onglets = st.tabs([f.stem.replace("_", " ").capitalize() for f in figures])
+            for onglet, fig in zip(onglets, figures):
+                with onglet:
+                    st.image(load_figure(famille, fig.stem), width="stretch")
+    
 
 with tab_selected_model:
     
     st.subheader("Modèle retenu")
     st.markdown("""
-    La variante XGBoost retenue s'appuie sur **44 variables** (décalages temporels, moyennes glissantes, variables de voisinage spatial) contre **23** pour les autres familles.
+    - **6 familles avec 23 features** pour prédire la variable cible (Logistic Regression, Linear SVC, Decision Tree, Random Forest, LightGBM, CatBoost)
     
-    Le gain provient donc de l'enrichissement des variables, non d'une supériorité algorithmique.
+    - **1 famille avec 44 features** pour prédire la variable cible (XGBoost)
+    """)
+    df_synthese_2 = load_csv("synthese_modeles_2")
+    df_synthese_2 = df_synthese_2.style.map(lambda _: "background-color: #d4edda; color: #155724;", subset=pd.IndexSlice[:, ['AUC-ROC Test', 'PR-AUC Test', 'F1 "Yes" Test']])
+    st.dataframe(df_synthese_2, width="stretch", height=800, use_container_width=True)
+    st.markdown("""
+    - **Le meilleur modèle tout périmètre confondu** : `xgboost_spatial_tuned` (AUC-ROC Test = 0.94, PR-AUC Test = 0.85, F1 "Yes" Test = 0.77)
+    
+    - **Le meilleur modèle à périmètre constant** : `catboost_final` (AUC-ROC Test = 0.88, PR-AUC Test = 0.72, F1 "Yes" Test = 0.65)
+    
+    - **Le concurrent immédiat à périmètre constant** : `light_gbm_threshold` (AUC-ROC Test = 0.88, PR-AUC Test = 0.72, F1 "Yes" Test = 0.61)
     """)
