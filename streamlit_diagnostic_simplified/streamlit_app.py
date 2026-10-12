@@ -428,6 +428,54 @@ def _map_view(station_frames: dict[str, pd.DataFrame]):
     )
 
 
+_HELP_CHI2 = """
+**Chi-square test of independence** between *which station* a day belongs to and
+*whether the model got that day wrong*.
+
+It compares each station's observed number of errors with the number expected if
+every station shared the overall error rate. The larger the value, the further
+the stations are from behaving alike.
+
+On its own the number is hard to read: it grows with the number of stations
+(here {dof} degrees of freedom) and the number of days ({n:,}). Read the p-value
+and Cramer's V instead.
+"""
+
+_HELP_P_VALUE = """
+**Is the model's error rate location-dependent at all?**
+
+The p-value is the probability of seeing station differences this large if the
+model were equally accurate everywhere.
+
+- **p < 0.05**: the differences are not chance. The model is genuinely better at
+  some stations than at others.
+- **p >= 0.05**: no evidence that skill depends on location.
+
+With tens of thousands of days, even a trivial difference gives a tiny p-value.
+So it says *whether* there is a location effect, not *how big* it is: that is
+Cramer's V.
+"""
+
+_HELP_CRAMERS_V = """
+**How strongly does location drive the model's errors?** This is the effect size,
+from 0 (station tells you nothing about the error) to 1 (station fully determines it).
+
+- **< 0.1** negligible: errors are spread evenly; one model fits all stations.
+- **0.1 - 0.2** small: some stations are noticeably harder.
+- **0.2 - 0.3** moderate: a real geographic bias, worth a per-region look.
+- **> 0.3** large: the model behaves very differently by location.
+
+A significant p-value with a negligible V means the bias is real but too small to
+matter in practice.
+"""
+
+_HELP_STATIONS = """
+Stations included in this breakdown: those with at least the sidebar's
+*Min days per station* of validation days. Stations below it are left out so a
+handful of days cannot pass for bias.
+"""
+
+
 def _bias_view(scores: dict[str, Scored], station_frames: dict[str, pd.DataFrame], stations_by_row):
     st.subheader("Is the model's skill location-dependent?")
     name = st.selectbox("Model", list(station_frames), key="bias_model")
@@ -437,10 +485,10 @@ def _bias_view(scores: dict[str, Scored], station_frames: dict[str, pd.DataFrame
     test = evaluation.location_dependence_test(scored, stations_by_row)
     if test:
         cols = st.columns(4)
-        cols[0].metric("Chi-square", f"{test['chi2']:,.1f}")
-        cols[1].metric("p-value", f"{test['p_value']:.2e}")
-        cols[2].metric("Cramer's V", f"{test['cramers_v']:.3f}")
-        cols[3].metric("Stations", f"{len(frame):,}")
+        cols[0].metric("Chi-square", f"{test['chi2']:,.1f}", help=_HELP_CHI2.format(**test))
+        cols[1].metric("p-value", f"{test['p_value']:.2e}", help=_HELP_P_VALUE)
+        cols[2].metric("Cramer's V", f"{test['cramers_v']:.3f}", help=_HELP_CRAMERS_V)
+        cols[3].metric("Stations", f"{len(frame):,}", help=_HELP_STATIONS)
         verdict = (
             "Error rate **does** vary by station beyond chance"
             if test["p_value"] < 0.05
