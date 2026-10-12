@@ -1,0 +1,94 @@
+{
+  "provenance": {
+    "source": "weatherAUS_MICE_cyclic.csv",
+    "train_end_exclusive": "2016-01-01",
+    "train_rows": 113506,
+    "generated_by": "tools/fit_preprocessing.py",
+    "max_abs_residual_vs_X_test": 5.950795411990839e-14
+  },
+  "scaler": {
+    "kind": "RobustScaler",
+    "columns": [
+      "MinTemp",
+      "MaxTemp",
+      "Rainfall",
+      "Evaporation",
+      "Sunshine",
+      "WindGustSpeed",
+      "WindSpeed9am",
+      "WindSpeed3pm",
+      "Humidity9am",
+      "Humidity3pm",
+      "Pressure9am",
+      "Pressure3pm",
+      "Cloud9am",
+      "Cloud3pm",
+      "Temp9am",
+      "Temp3pm"
+    ],
+    "center": [
+      11.9,
+      22.5,
+      0.0,
+      4.6,
+      8.113990523099487,
+      39.0,
+      13.0,
+      19.0,
+      70.0,
+      52.0,
+      1017.967362131356,
+      1015.5,
+      4.3714418774519395,
+      4.42557513721915,
+      16.6,
+      21.0
+    ],
+    "scale": [
+      9.2,
+      10.200000000000003,
+      0.6,
+      4.252744023642515,
+      4.844168375925548,
+      17.0,
+      12.0,
+      11.0,
+      26.0,
+      29.0,
+      8.5,
+      8.536520560136978,
+      5.0,
+      3.9498039950044674,
+      9.3,
+      9.7
+    ]
+  },
+  "direction_encoding": {
+    "E": 0,
+    "ENE": 1,
+    "ESE": 2,
+    "N": 3,
+    "NE": 4,
+    "NNE": 5,
+    "NNW": 6,
+    "NW": 7,
+    "S": 8,
+    "SE": 9,
+    "SSE": 10,
+    "SSW": 11,
+    "SW": 12,
+    "W": 13,
+    "WNW": 14,
+    "WSW": 15
+  },
+  "direction_columns": [
+    "WindGustDir",
+    "WindDir9am",
+    "WindDir3pm"
+  ],
+  "neighbour_graph": {
+    "k": 3,
+    "rule": "west_strict"
+  },
+  "engineered_on": "raw"
+}

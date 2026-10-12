@@ -174,3 +174,5 @@ models/
 **/catboost_info/
 __pycache__/
 *.pyc
+# Streamlit secrets (API keys)
+.streamlit/secrets.toml
